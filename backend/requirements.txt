@@ -5,7 +5,7 @@ chardet==3.0.4
 colorama==0.4.1
 et-xmlfile==1.0.1
 gspread==3.1.0
-httplib2==0.16.0
+httplib2==0.18.0
 idna==2.8
 importlib-metadata==0.23
 jdcal==1.4.1
