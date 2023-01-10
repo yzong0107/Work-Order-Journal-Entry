@@ -13,8 +13,18 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 class WOJournalEntry():
     def setup_method(self):
-        self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
-        self.vars={}
+        options = webdriver.ChromeOptions()
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--disable-extensions")
+        # options.add_argument("--no-sandbox")
+        options.add_argument("--remote-debugging-port=9222")
+        # options.add_argument("--headless")
+
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        self.driver.maximize_window()
+
+        self.vars = {}
 
     def teardown_method(self):
         self.driver.quit()
@@ -68,7 +78,7 @@ class WOJournalEntry():
 
     def login(self):
         self.driver.get("https://www.aimprod.ualberta.ca/fmax/login")
-        self.driver.set_window_size(1900, 1020)
+        # self.driver.set_window_size(1900, 1020)
         username = input('Enter your username: ')
         password = getpass.getpass('Enter your password : ')
         self.driver.find_element(By.ID, "username").send_keys(username)
